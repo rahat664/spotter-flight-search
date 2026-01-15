@@ -66,8 +66,9 @@ export function FiltersPanel({ offers }: { offers: FlightOffer[] }) {
         }
     }, [priceRange, priceStats, setFilters]);
 
-    const handleStopsChange = (value: number | null) => {
-        setFilters({ maxStops: value });
+    const handleStopsChange = (value: number | "any" | null) => {
+        const next = value === "any" || value === null ? null : value;
+        setFilters({ maxStops: next });
     };
 
     const handleAirlineToggle = (code: string) => {
@@ -113,14 +114,14 @@ export function FiltersPanel({ offers }: { offers: FlightOffer[] }) {
                         <Typography variant="caption" color="var(--muted)" fontWeight={700}>Stops</Typography>
                         <ToggleButtonGroup
                             exclusive
-                            value={maxStops ?? undefined}
+                            value={maxStops === null ? "any" : maxStops}
                             onChange={(_, val) => handleStopsChange(val)}
                             fullWidth
                             size="small"
                             color="primary"
                         >
                             {stopOptions.map((opt) => (
-                                <ToggleButton key={opt.label} value={opt.value ?? ""} sx={{ textTransform: "none" }}>
+                                <ToggleButton key={opt.label} value={opt.value === null ? "any" : opt.value} sx={{ textTransform: "none" }}>
                                     {opt.label}
                                 </ToggleButton>
                             ))}
