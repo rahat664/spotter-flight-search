@@ -33,12 +33,8 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
     const departureData = useMemo(() => deriveDepartureHourBuckets(offers), [offers]);
     const stats = useMemo(() => derivePriceStats(offers), [offers]);
 
-    const formatTooltip = (value: number | string, name?: string) => {
-        if (name === "avg") {
-            return [`${value}`, "Avg Price"];
-        }
-        return [value, "Count"];
-    };
+    const formatTooltip = (value: number | string) => [value ?? 0, "Count"];
+    const formatStopsTooltip = (value: number | string) => [`${value}`, "Avg Price"];
 
     const xTickFormatter = (label: string) => {
         if (label.length <= 8) return label;
@@ -65,7 +61,7 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                     }}
                     labelStyle={{ color: "var(--muted)", fontSize: 12 }}
-                    formatter={(val?: number) => [val ?? 0, "Count"]}
+                    formatter={formatTooltip as any}
                     labelFormatter={(label: string) => `Range: ${label}`}
                 />
                 <Bar dataKey="count" fill="url(#gradDistribution)" isAnimationActive animationDuration={500} />
@@ -90,7 +86,7 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                     }}
                     labelStyle={{ color: "var(--muted)", fontSize: 12 }}
-                    formatter={formatTooltip}
+                    formatter={formatStopsTooltip as any}
                 />
                 <Bar dataKey="avg" fill="url(#gradStops)" isAnimationActive animationDuration={500} />
                 <defs>
@@ -114,7 +110,7 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                     }}
                     labelStyle={{ color: "var(--muted)", fontSize: 12 }}
-                    formatter={formatTooltip}
+                    formatter={formatTooltip as any}
                     labelFormatter={(label: string) => `Airline: ${label}`}
                 />
                 <Bar dataKey="avg" fill="url(#gradAirlines)" isAnimationActive animationDuration={500} />
@@ -139,7 +135,7 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                     }}
                     labelStyle={{ color: "var(--muted)", fontSize: 12 }}
-                    formatter={(val: number, name: string) => [val, name === "min" ? "Min Price" : "Avg Price"]}
+                    formatter={((val: any, name: any) => [val ?? 0, name === "min" ? "Min Price" : "Avg Price"]) as any}
                 />
                 <Legend wrapperStyle={{ fontSize: 11, color: "var(--muted)" }} />
                 <Line type="monotone" dataKey="avg" stroke="var(--neon-cyan)" strokeWidth={2} dot={{ r: 3 }} isAnimationActive animationDuration={500} name="Avg Price" />
@@ -159,7 +155,7 @@ export function PriceGraph({ offers }: { offers: FlightOffer[] }) {
                         boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                     }}
                     labelStyle={{ color: "var(--muted)", fontSize: 12 }}
-                    formatter={formatTooltip}
+                    formatter={formatTooltip as any}
                 />
                 <Bar dataKey="avg" fill="url(#gradStops)" isAnimationActive animationDuration={500} />
                 <defs>

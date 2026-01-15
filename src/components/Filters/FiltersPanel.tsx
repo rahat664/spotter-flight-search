@@ -113,14 +113,14 @@ export function FiltersPanel({ offers }: { offers: FlightOffer[] }) {
                         <Typography variant="caption" color="var(--muted)" fontWeight={700}>Stops</Typography>
                         <ToggleButtonGroup
                             exclusive
-                            value={maxStops}
+                            value={maxStops ?? undefined}
                             onChange={(_, val) => handleStopsChange(val)}
                             fullWidth
                             size="small"
                             color="primary"
                         >
                             {stopOptions.map((opt) => (
-                                <ToggleButton key={opt.label} value={opt.value} sx={{ textTransform: "none" }}>
+                                <ToggleButton key={opt.label} value={opt.value ?? ""} sx={{ textTransform: "none" }}>
                                     {opt.label}
                                 </ToggleButton>
                             ))}
