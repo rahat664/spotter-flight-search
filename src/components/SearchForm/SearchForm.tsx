@@ -33,10 +33,16 @@ export function SearchForm() {
     const [originInput, setOriginInput] = useState(search.origin);
     const [destInput, setDestInput] = useState(search.destination);
 
+const futureDate = (days: number) => {
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return format(d, "yyyy-MM-dd");
+};
+
 const recentSearches = [
-    { origin: "DAC", destination: "DXB", departDate: "2024-09-10", returnDate: "2024-09-20" },
-    { origin: "DAC", destination: "LHR", departDate: "2024-09-15", returnDate: "2024-09-28" },
-    { origin: "DAC", destination: "SIN", departDate: "2024-09-05", returnDate: "" },
+    { origin: "DAC", destination: "DXB", departDate: futureDate(10), returnDate: futureDate(20) },
+    { origin: "DAC", destination: "LHR", departDate: futureDate(12), returnDate: futureDate(24) },
+    { origin: "DAC", destination: "SIN", departDate: futureDate(9), returnDate: "" },
 ];
 
 type AirportAutocompleteProps = {
