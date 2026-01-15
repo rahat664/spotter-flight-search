@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+    color-scheme: dark;
+    --bg: #0b1018;
+    --panel: rgba(17, 24, 39, 0.72);
+    --panel2: rgba(17, 24, 39, 0.6);
+    --border: rgba(148, 163, 184, 0.45);
+    --text: #e5edf8;
+    --muted: #9fb5cf;
+    --neon-cyan: #22d3ee;
+    --neon-purple: #a855f7;
+    --neon-green: #22c55e;
+    --neon-pink: #f472b6;
+    --hero-from: #22d3ee;
+    --hero-to: #a855f7;
+    --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.35);
+    --shadow-neon: 0 0 35px rgba(34, 211, 238, 0.35);
+    --radius-sm: 8px;
+    --radius: 12px;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    background-color: var(--bg);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, #root {
+    min-height: 100dvh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.08), transparent 42%),
+        radial-gradient(circle at 80% 15%, rgba(168, 85, 247, 0.08), transparent 40%),
+        var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input, select, button, textarea {
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(12%);
+        opacity: 0.7;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slide-up 0.25s ease-out;
+}
+
+.min-h-dvh {
+    min-height: 100dvh;
+}
